@@ -36,7 +36,7 @@ func Dump(w io.Writer, err error) {
 // Sdump will return the formatted error string (with each error in its own
 // line)
 func Sdump(err error) string {
-	pc, filename, linenr, _ := runtime.Caller(2)
+	pc, filename, linenr, _ := runtime.Caller(1)
 	strs := strings.Split(runtime.FuncForPC(pc).Name(), "/")
 	function := strs[len(strs)-1]
 	err = fmt.Errorf("Error in %s:%d (%s) %w", filename, linenr, function, err)
@@ -47,7 +47,7 @@ func Sdump(err error) string {
 // S1dump will return the raw error string (the entire error stack trace in one
 // line)
 func S1dump(err error) string {
-	pc, filename, linenr, _ := runtime.Caller(2)
+	pc, filename, linenr, _ := runtime.Caller(1)
 	strs := strings.Split(runtime.FuncForPC(pc).Name(), "/")
 	function := strs[len(strs)-1]
 	err = fmt.Errorf("Error in %s:%d (%s) %w", filename, linenr, function, err)
